@@ -2784,10 +2784,7 @@ function setHomeMode(m){
   logAction('mode_switch',{mode:m});
   homeMode=m;saveData();renderHome();
 }
-function updateModeToggleUI(){
-  document.getElementById('modeBig').classList.toggle('on',homeMode==='big');
-  document.getElementById('modeList').classList.toggle('on',homeMode==='list');
-}
+function updateModeToggleUI(){}
 
 /* Desire meter removed */
 function addKaraDesire(){}
