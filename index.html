@@ -2748,21 +2748,11 @@ function getOverlappingSongs(){
    HOME SCREEN
    ============================================ */
 function renderHome(){
-  updateKaraMeterUI();
-  updateModeToggleUI();
-  if(homeMode==='big'){
-    document.getElementById('bigcardArea').style.display='';
-    document.getElementById('stack').style.display='none';
-    renderBigCards();
-  }else{
-    document.getElementById('bigcardArea').style.display='none';
-    document.getElementById('stack').style.display='';
-    renderListCards();
-  }
-  document.getElementById('counter').textContent=`${seen.size} / ${S.length}\u66F2`;
+  renderBigCards();
 }
 function renderListCards(){
   const st=document.getElementById('stack');
+  if(!st)return;
   st.querySelectorAll('.vcard,.vcard-empty').forEach(c=>c.remove());
   if(!displayed.length){
     const e=document.createElement('div');e.className='vcard-empty';
@@ -3031,7 +3021,7 @@ function addCard(slot){
   }
   setTimeout(()=>{
     addCardLogic(slot);addKaraDesire(6);
-    if(homeMode==='list'){removeAndPatchList(card);}else{renderHome();}
+    renderHome();
     updateKaraMeterUI();
     document.getElementById('counter').textContent=`${seen.size} / ${S.length}\u66F2`;
     _swiping=false;
@@ -3048,13 +3038,13 @@ function skipCard(slot){
   }
   setTimeout(()=>{
     skipCardLogic(slot);addKaraDesire(2);
-    if(homeMode==='list'){removeAndPatchList(card);}else{renderHome();}
+    renderHome();
     updateKaraMeterUI();
     document.getElementById('counter').textContent=`${seen.size} / ${S.length}\u66F2`;
     _swiping=false;
   },320);
 }
-function removeAndPatchList(card){
+function removeAndPatchList(card){return;// disabled
   if(card)card.remove();
   const st=document.getElementById('stack');
   const prevCount=st.querySelectorAll('.vcard').length;
@@ -3112,7 +3102,7 @@ function bindVCardSwipe(card,slot){
       card.style.transform='translate(380px,-30px) rotate(22deg)';card.style.opacity='0';
       setTimeout(()=>{
         addCardLogic(slot);addKaraDesire(6);
-        if(homeMode==='list'){removeAndPatchList(card);}else{renderHome();}
+        renderHome();
         updateKaraMeterUI();
         document.getElementById('counter').textContent=`${seen.size} / ${S.length}\u66F2`;
         _swiping=false;
@@ -3124,7 +3114,7 @@ function bindVCardSwipe(card,slot){
       card.style.transform='translate(-380px,-30px) rotate(-22deg)';card.style.opacity='0';
       setTimeout(()=>{
         skipCardLogic(slot);addKaraDesire(2);
-        if(homeMode==='list'){removeAndPatchList(card);}else{renderHome();}
+        renderHome();
         updateKaraMeterUI();
         document.getElementById('counter').textContent=`${seen.size} / ${S.length}\u66F2`;
         _swiping=false;
