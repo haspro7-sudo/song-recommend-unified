@@ -3633,15 +3633,21 @@ function renderBkList(){
       <div class="bk-info">
         <div class="title">${s.t}</div>
         <div class="artist">${s.a}</div>
-        <div class="badges">
-          <span class="htag genre">#${s.g||s.tag}</span>
-          ${s.ft?`<span class="htag genre">#${s.ft}</span>`:''}
-          <span class="htag air">${MOOD_EMOJI[s.mood]||''} ${s.mood}</span>
-          <span class="htag diff">${DIFF_LABEL[s.d]}</span>
-          ${s.era?`<span class="htag key">${s.era}</span>`:''}
-          <span style="font-size:11px;font-weight:700;color:${dCol}">${dSing}%</span>
-        </div>
-        ${grpInfo}
+        ${hasGroup?`
+          <div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">
+            <span class="grp-song-knower is-me">\u{1F464} \u81EA\u5206 ${isWant?'\u6B4C\u3044\u305F\u3044':'\u77E5\u3063\u3066\u308B'}</span>
+            ${grpInfo?grpInfo.replace('<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">','').replace('</div>',''):''}
+          </div>
+        `:`
+          <div class="badges">
+            <span class="htag genre">#${s.g||s.tag}</span>
+            ${s.ft?`<span class="htag genre">#${s.ft}</span>`:''}
+            <span class="htag air">${MOOD_EMOJI[s.mood]||''} ${s.mood}</span>
+            <span class="htag diff">${DIFF_LABEL[s.d]}</span>
+            ${s.era?`<span class="htag key">${s.era}</span>`:''}
+            <span style="font-size:11px;font-weight:700;color:${dCol}">${dSing}%</span>
+          </div>
+        `}
       </div>
       <div class="bk-del" data-did="${b.id}"><span class="material-symbols-rounded" style="font-size:18px">close</span></div>
     </div>`;
