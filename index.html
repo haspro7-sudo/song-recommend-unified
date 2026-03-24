@@ -932,7 +932,9 @@ img{display:block;max-width:100%}
 }
 /* Card action zones */
 .bigcard-actions{position:relative;z-index:2;display:flex;align-items:center;justify-content:center;gap:0;width:100%;height:100%;padding:0 12px}
-.bigcard-arrow{font-size:28px;color:var(--text-d);opacity:.4;flex-shrink:0}
+.bigcard-arrow{width:0;height:0;flex-shrink:0;opacity:.35}
+.bigcard-arrow.left{border-top:12px solid transparent;border-bottom:12px solid transparent;border-right:14px solid var(--text-d)}
+.bigcard-arrow.right{border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:14px solid var(--growth)}
 .bigcard-action-group{display:flex;align-items:center;gap:16px;margin:0 8px}
 .bigcard-action{display:flex;flex-direction:column;align-items:center;gap:4px;opacity:.6;transition:opacity .2s,transform .2s}
 .bigcard-action .action-circle{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2.5px solid rgba(0,0,0,.12);background:rgba(255,255,255,.9);backdrop-filter:blur(6px);box-shadow:0 2px 8px rgba(0,0,0,.08)}
@@ -2827,7 +2829,7 @@ function mkBigCard(sIdx,isBehind){
   d.innerHTML=`
     <div class="bigcard-art" style="background:linear-gradient(135deg,${s.c[0]},${s.c[1]||s.c[0]})">
       <div class="bigcard-actions">
-        <span class="bigcard-arrow material-symbols-rounded">chevron_left</span>
+        <div class="bigcard-arrow left"></div>
         <div class="bigcard-action-group">
           <div class="bigcard-action skip-zone" id="hintSkip_${sIdx}">
             <div class="action-circle"><span class="material-symbols-rounded">close</span></div>
@@ -2838,7 +2840,7 @@ function mkBigCard(sIdx,isBehind){
             <span class="action-label">\u77E5\u3063\u3066\u308B</span>
           </div>
         </div>
-        <span class="bigcard-arrow material-symbols-rounded">chevron_right</span>
+        <div class="bigcard-arrow right"></div>
       </div>
     </div>
     <div class="bigcard-body">
